@@ -154,13 +154,7 @@ void stop(activeObject *aoObj)
     free(aoObj);
 }
 
-// void stopAll(activeObject *ao1, activeObject *ao2, activeObject *ao3, activeObject *ao4)
-// {
-//     stop(ao1);
-//     stop(ao2);
-//     stop(ao3);
-//     stop(ao4);
-// }
+
 
 queue *getQueue(activeObject *obj)
 {
@@ -171,8 +165,12 @@ void *nextQueue1(void *args)
 {
      int *number = ( int *)args;
 
-    printf("%d\n%s\n", *number ,isPrime(*number) ? "true" : "false");
-
+    if(isPrime(*number)){
+        printf("%d\n",*number);
+        printf("true\n");
+    }else{
+         printf("false\n");
+    }
     enqueue(getQueue(AO2), number);
 
     return NULL;
@@ -190,7 +188,6 @@ void *nextQueue2(void *args)
     }else{
          printf("false\n");
     }
-    // printf("%d\n%s\n", *number, isPrime(*number) ? "true" : "false");
 
     enqueue(getQueue(AO3), number);
 
@@ -209,7 +206,6 @@ void *nextQueue3(void *args)
     }else{
          printf("false\n");
     }
-    // printf("%u\n%s\n", *number, isPrime(*number) ? "true" : "false");
 
     enqueue(getQueue(AO4), number);
 
@@ -225,7 +221,6 @@ void *nextQueue4(void *args)
     *number += 2;
         printf("%d\n",*number);
     
-    // printf("%u\n", *number);
 
     free(number);
 
@@ -233,13 +228,7 @@ void *nextQueue4(void *args)
 
 }
 
-// void initializeActiveObjects(activeObject **ao1, activeObject **ao2, activeObject **ao3, activeObject **ao4)
-// {
-//     *ao1 = createActiveObject(nextQueue1);
-//     *ao2 = createActiveObject(nextQueue2);
-//     *ao3 = createActiveObject(nextQueue3);
-//     *ao4 = createActiveObject(nextQueue4);
-// }
+
 
 void updateFirstQueue(activeObject *aobj, int size)
 {
@@ -281,11 +270,9 @@ int main(int argc, char **argv)
     AO2 = createActiveObject(nextQueue2);
     AO3 = createActiveObject(nextQueue3);
     AO4 = createActiveObject(nextQueue4);
-    // initializeActiveObjects(&AO1,&AO2,&AO3, &AO4);
 
     updateFirstQueue(AO1,iter);
 
-    // stopAll(AO1,AO2,AO3,AO4);
 
     stop(AO1);
     stop(AO2);
